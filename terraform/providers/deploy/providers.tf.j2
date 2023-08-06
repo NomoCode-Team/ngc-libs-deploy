@@ -1,0 +1,44 @@
+terraform {
+  required_providers {
+{% for k, v in deploy.terraform.required_providers.items() %}
+    {{ k }} = {
+      source  = "{{ v.source }}"
+      version = "{{ v.version }}"
+    }
+{% endfor %}
+  }
+}
+
+{% if 'digitalocean' in deploy.terraform.required_providers %}
+variable "DIGITALOCEAN_API_TOKEN" {
+  type = string
+  sensitive = true
+}
+
+provider "digitalocean" {
+  token = var.DIGITALOCEAN_API_TOKEN
+}
+{% endif %}
+
+{% if 'cloudflare' in deploy.terraform.required_providers %}
+variable "CLOUDFLARE_API_TOKEN" {
+  type = string
+  sensitive = true
+}
+
+provider "cloudflare" {
+  api_token = var.CLOUDFLARE_API_TOKEN
+}
+{% endif %}
+
+{% if 'gitlab' in deploy.terraform.required_providers %}
+variable "GITLAB_API_TOKEN" {
+  type = string
+  sensitive = true
+}
+
+provider "gitlab" {
+  token = var.GITLAB_API_TOKEN
+  base_url = "https://db.nomocode.io/api/v4/"
+}
+{% endif %}

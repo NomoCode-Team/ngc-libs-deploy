@@ -1,0 +1,10 @@
+{
+    "type": "object",
+    "properties": {
+      "GOOGLE_APPLICATION_CREDENTIALS": {
+        "description": "Credentials for Terraform GCS backend",
+        "type": "string"
+      }
+    },
+    "required": [ "GOOGLE_APPLICATION_CREDENTIALS" ]
+}

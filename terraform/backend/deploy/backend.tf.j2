@@ -1,0 +1,6 @@
+terraform {
+  backend "gcs" {
+    bucket  = "ngc-tf-state-admin"
+    prefix  = "{{ ngc.project.name }}/{{ ngc.app.name }}/{{ ngc.environment }}"
+  }
+}
