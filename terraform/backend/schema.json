@@ -4,7 +4,21 @@
       "GOOGLE_APPLICATION_CREDENTIALS": {
         "description": "Credentials for Terraform GCS backend",
         "type": "string"
+      },
+      "ngc": {
+        "type": "object",
+        "properties": {
+          "workspace": {
+            "type": "object",
+            "properties": {
+              "name": "string",
+              "description": "NGC workspace name"
+            }
+          },
+          "required": ["name"]
+        },
+        "required": ["workspace"]
       }
     },
-    "required": [ "GOOGLE_APPLICATION_CREDENTIALS" ]
+    "required": [ "GOOGLE_APPLICATION_CREDENTIALS", "ngc" ]
 }
