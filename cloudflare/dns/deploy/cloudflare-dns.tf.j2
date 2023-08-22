@@ -1,0 +1,12 @@
+variable "CLOUDFLARE_ZONE_ID" {
+  type = string
+  sensitive = true
+}
+
+resource "cloudflare_record" "server_dns_record" {
+  zone_id = var.CLOUDFLARE_ZONE_ID
+  name    = "{{ deploy.cloudflare.dns.record.name }}"
+  value   = {{ '"' + deploy.cloudflare.dns.record.value + '"' if deploy.cloudflare.dns.record.value else 'local.server_ipv4_address' }}
+  type    = "{{ deploy.cloudflare.dns.record.type }}"
+  proxied = {{ 'true' if deploy.cloudflare.dns.record.value else 'false' }}
+}
