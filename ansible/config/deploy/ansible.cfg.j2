@@ -1,0 +1,7 @@
+{% for cfg_group, entries in deploy.ansible.config.items() %}
+[{{ cfg_group }}]
+{% for key, value in entries.items() %}
+{{ key }}={{ value }}
+{% endfor %}
+
+{% endfor %}

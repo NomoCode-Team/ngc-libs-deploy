@@ -1,0 +1,7 @@
+deploy:
+  ansible:
+    config:
+      defaults:
+        host_key_checking: "False"
+      ssh_connection:
+        retries: 6
