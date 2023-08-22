@@ -1,0 +1,18 @@
+resource "null_resource" "artifacts_extraction" {
+  
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+
+  provisioner "local-exec" {
+    command = join(" ",
+        [
+            "mkdir artifacts",
+            "&& tar -xf artifacts.tar -C artifacts",
+            "&& /usr/local/bin/netlify deploy",
+            "--site {{ deploy.netlify.site }}",
+            "--dir artifacts {{ '--prod' if ngc.environment == 'prod' else '' }}"
+        ]
+    )
+  }
+}
