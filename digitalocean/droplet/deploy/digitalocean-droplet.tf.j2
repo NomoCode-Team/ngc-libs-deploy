@@ -1,0 +1,30 @@
+{% if deploy.digitalocean.droplet.create_ssh_key == True %}
+
+resource "tls_private_key" "droplet_id_rsa" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "digitalocean_ssh_key" "droplet_id_rsa" {
+  name       = "web-ssh-key"
+  public_key = tls_private_key.droplet_id_rsa.public_key_openssh
+}
+
+{% endif %}
+
+resource "digitalocean_droplet" "server" {
+  image  = "{{ deploy.digitalocean.droplet.image }}"
+  name   = "{{ deploy.digitalocean.droplet.name }}"
+  region = "{{ deploy.digitalocean.droplet.region }}"
+  size   = "{{ deploy.digitalocean.droplet.size }}"
+{% if deploy.digitalocean.droplet.create_ssh_key == True %}
+  ssh_keys = [digitalocean_ssh_key.droplet_id_rsa.id]
+{% endif %}
+}
+
+locals {
+  server_ipv4_address = digitalocean_droplet.server.ipv4_address
+{% if deploy.digitalocean.droplet.create_ssh_key == True %}
+  ssh_key = tls_private_key.droplet_id_rsa
+{% endif %}
+}
