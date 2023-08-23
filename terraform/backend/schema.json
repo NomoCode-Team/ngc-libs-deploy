@@ -11,8 +11,10 @@
           "workspace": {
             "type": "object",
             "properties": {
-              "name": "string",
-              "description": "NGC workspace name"
+              "name": {
+                "type": "string",
+                "description": "NGC workspace name"
+              }
             }
           },
           "required": ["name"]

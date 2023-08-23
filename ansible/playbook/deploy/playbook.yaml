@@ -1,0 +1,5 @@
+---
+- name: Configure node
+  hosts: all
+  tasks:
+{{ deploy.ansible.playbook.tasks | to_yaml | indent(4, true) }}

@@ -1,7 +1,14 @@
 deploy:
+  terraform:
+    required_providers:
+      digitalocean:
+        source: digitalocean/digitalocean
+        version: ~> 2.0
   digitalocean:
     droplet:
       image: ubuntu-20-04-x64
       region: nyc1
       size: s-1vcpu-512mb-10gb
       create_ssh_key: false
+
+

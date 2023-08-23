@@ -1,0 +1,20 @@
+- name: Check if docker is installed
+  shell: which docker || true
+  register: result
+
+- name: Install Docker
+  shell: |
+    set -e
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
+    rm get-docker.sh
+  when: not 'docker' in result.stdout
+  register: install_result
+  until: install_result.rc == 0
+  retries: "{{ retries }}"
+  delay: "{{ delay }}"
+
+- name: Ensure Docker daemon is running
+  systemd:
+    name: docker
+    state: started
