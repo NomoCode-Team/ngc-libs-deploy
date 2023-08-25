@@ -1,0 +1,4 @@
+from:
+  - deploy/ansible/playbook
+  - deploy/ansible/roles/docker/install
+  - deploy/ansible/roles/docker/import-image

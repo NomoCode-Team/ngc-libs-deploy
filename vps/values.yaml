@@ -1,0 +1,17 @@
+deploy:
+  ansible:
+    playbook:
+      tasks:
+        - import_role:
+            name: docker/install
+        - import_role:
+            name: docker/import-image
+        - name: Start container
+          docker_container:
+            name: "{{ ngc.project.name }}"
+            image: "{{ ngc.project.name }}"
+            state: started
+            restart: yes
+            ports: "!ref deploy.vps.ports"
+  vps:
+    ports: []
