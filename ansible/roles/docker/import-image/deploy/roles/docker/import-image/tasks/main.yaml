@@ -1,0 +1,10 @@
+- name: Fetch application image
+  copy:
+    src: "{{ src_tar }}"
+    dest: image.tar
+
+- name: Load application image to docker
+  shell: |
+    set -e
+    docker load < image.tar
+    rm image.tar

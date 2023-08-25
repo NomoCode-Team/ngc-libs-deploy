@@ -1,6 +1,0 @@
-ansible:
-  tasks:
-    install:
-      docker:
-        retries: 5
-        delay: 30
