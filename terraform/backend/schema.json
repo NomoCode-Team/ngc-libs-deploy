@@ -1,26 +1,18 @@
 {
     "type": "object",
     "properties": {
-      "GOOGLE_APPLICATION_CREDENTIALS": {
-        "description": "Credentials for Terraform GCS backend",
+      "PGUSER": {
+        "description": "Terraform backend user name",
         "type": "string"
       },
-      "ngc": {
-        "type": "object",
-        "properties": {
-          "workspace": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "NGC workspace name"
-              }
-            }
-          },
-          "required": ["name"]
-        },
-        "required": ["workspace"]
+      "PGPASSWORD": {
+        "description": "Terraform backend password",
+        "type": "string"
+      },
+      "PGDATABASE": {
+        "description": "Terraform backend database",
+        "type": "string"
       }
     },
-    "required": [ "GOOGLE_APPLICATION_CREDENTIALS", "ngc" ]
+    "required": [ "PGUSER", "PGPASSWORD", "PGDATABASE" ]
 }
