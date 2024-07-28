@@ -1,0 +1,16 @@
+---
+type: object
+properties:
+  PGUSER:
+    description: Terraform backend user name
+    type: string
+  PGPASSWORD:
+    description: Terraform backend password
+    type: string
+  PGDATABASE:
+    description: Terraform backend database
+    type: string
+required:
+- PGUSER
+- PGPASSWORD
+- PGDATABASE

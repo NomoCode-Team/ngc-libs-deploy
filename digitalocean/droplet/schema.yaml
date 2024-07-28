@@ -1,0 +1,67 @@
+---
+type: object
+properties:
+  deploy:
+    type: object
+    description: Deploy namespace
+    properties:
+      digitalocean:
+        type: object
+        description: Digitalocean namespace
+        properties:
+          droplet:
+            description: Defines Digitalocean droplet
+            type: object
+            properties:
+              name:
+                description: The Droplet name
+                type: string
+              image:
+                description: The Droplet image ID or slug. This could be either image
+                  ID or droplet snapshot ID
+                type: string
+                enum:
+                - ubuntu-20-04-x64
+                - ubuntu-22-04-x64
+              region:
+                description: The region where the Droplet will be created
+                type: string
+                enum:
+                - nyc1
+                - nyc2
+                - nyc3
+                - sfo1
+                - sfo2
+                - sfo3
+                - ams2
+                - ams3
+                - sgp1
+                - lon1
+                - fra1
+                - tor1
+                - blr1
+                - syd1
+              size:
+                description: The unique slug that indentifies the type of Droplet.
+                  You can find a list of available slugs on [DigitalOcean API documentation](https://slugs.do-api.dev/)
+                type: string
+                enum:
+                - s-1vcpu-512mb-10gb
+                - s-1vcpu-1gb
+                - s-1vcpu-2gb
+              create_ssh_key:
+                type: boolean
+                description: Specifies whether or not an ssh key should be created
+                  and provided for droplet
+            required:
+            - name
+            - image
+            - region
+            - size
+            - create_ssh_key
+        required:
+        - droplet
+    required:
+    - digitalocean
+required:
+- deploy
